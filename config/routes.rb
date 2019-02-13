@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 # root '/'
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[create destroy]
+      resources :users, only: %i[index create destroy]
       resources :sessions, only: %i[create destroy]
     end
   end

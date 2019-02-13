@@ -1,5 +1,10 @@
 class Api::V1::UsersController < ApplicationController
-   def create
+   def index
+    @users = User.all
+    render json: @users, status: :ok
+   end
+   
+    def create
     
    end
 
@@ -7,5 +12,5 @@ class Api::V1::UsersController < ApplicationController
    end
 
    private
-   
+
 end
