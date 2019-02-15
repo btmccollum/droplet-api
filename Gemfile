@@ -15,15 +15,22 @@ gem 'active_model_serializers'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
+
+gem 'dotenv-rails'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise', '~> 4.6', '>= 4.6.1'
+gem 'devise-jwt', '~> 0.5.8'
+gem 'simple_token_authentication', '~> 1.15', '>= 1.15.1'
 
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2', '~> 0.6.0'
 gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
+
+
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
