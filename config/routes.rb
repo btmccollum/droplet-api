@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/auth/:provider/callback', to: 'sessions#create'
+  
+  # get '/auth/:provider/callback', to: 'sessions#create'
   # get "/login", to: "sessions#new"
   # get 'user', to: 'users#show', as: 'user_show'
   #     post 'signup', to: 'users#create', as: 'user_signup'
