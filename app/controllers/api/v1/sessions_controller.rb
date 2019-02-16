@@ -1,12 +1,12 @@
 class Api::V1::SessionsController < ApplicationController
     def create
-        binding.pry
+        token = generate_token
         query_params = {
             client_id: ENV['REDDIT_KEY'],
             response_type: "code",
             redirect_uri: ENV['REDIRECT_URI'],
             duration: "permanent",
-            state: 'test',
+            state: token,
             scope: "identity edit read save submit subscribe vote history"
         }
 
@@ -27,5 +27,19 @@ class Api::V1::SessionsController < ApplicationController
 
     def existing_oauth_user?
         User.find_by(uid: auth[:uid])
+    end
+
+    private
+
+    def respond_with(resource, _opts = {})
+        render json: resource
+    end
+
+    def respond_to_on_destroy
+        head :no_content
+    end
+
+    def generate_token
+        Sysrandom.random_number(32)
     end
 end
