@@ -28,7 +28,7 @@ class Api::V1::UsersController < ApplicationController
 
          auth_params = JSON.parse(response.body)
 
-         redirect_to :controller => 'api/v1/users', :action => 'create'
+         binding.pry
      end
     
    end

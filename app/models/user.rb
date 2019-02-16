@@ -4,8 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[reddit],
-         :jwt_authenticatable, jwt_revocation_strategy: JWTBlacklist
+         :omniauthable, omniauth_providers: %i[reddit]
+        #  :jwt_authenticatable, jwt_revocation_strategy: JWTBlacklist
 
 
   def self.from_omniauth(auth)
@@ -17,6 +17,7 @@ class User < ApplicationRecord
     # If you are using confirmable and the provider(s) you use validate emails, 
     # uncomment the line below to skip the confirmation emails.
     # user.skip_confirmation!
+    end
   end
 
 end

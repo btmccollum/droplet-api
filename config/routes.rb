@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  # devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'api/v1/users/omniauth_callbacks' }
+  
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[index create destroy]
@@ -10,7 +11,17 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/auth/:provider/callback', to: 'api/v1/users#create'
+  get '/users/sign_in', to: 'api/v1/users/omniauth_callbacks#reddit'
+  # devise_scope :user do
+  #   get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
+  #   get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  # end
+
+  # get '/auth/:provider/callback', to: 'api/v1/users#create'
+  # devise_scope :user do 
+  #   # get '/auth/reddit/callback', to: 'api/v1/users/omniauth_callbacks#reddit'
+  #   get '/login', to: 'api/v1/sessions#create'
+  # end
   
   # get "/login", to: "sessions#new"
   # get 'user', to: 'users#show', as: 'user_show'

@@ -30,8 +30,7 @@ gem 'devise-jwt', '~> 0.5.8'
 gem 'simple_token_authentication', '~> 1.15', '>= 1.15.1'
 
 gem 'omniauth', '~> 1.9'
-gem 'omniauth-facebook', '~> 5.0'
-gem 'omniauth-google-oauth2', '~> 0.6.0'
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
 
 

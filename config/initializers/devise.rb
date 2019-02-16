@@ -261,7 +261,17 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # config.omniauth :facebook, 'APP_ID', 'APP_SECRET'
-  config.omniauth :reddit, ENV['REDDIT_KEY'], ENV['REDDIT_SECRET'], scope: %i[vote save edit read identity]
+  config.omniauth :reddit, ENV['REDDIT_KEY'], ENV['REDDIT_SECRET'], { 
+    :provider_ignores_state => true,  
+    grant_type: "authorization_code",
+    client_id: ENV['REDDIT_KEY'],
+    response_type: "code",
+    redirect_uri: ENV['REDIRECT_URI'],
+    # redirect_uri: ENV[],
+    duration: "permanent",
+    # state: test,
+    scope: "identity edit read save submit subscribe vote history"  
+  }
   # , token_params: { parse: :json }
 
 

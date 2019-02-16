@@ -1,6 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
     def create
         token = generate_token
+        binding.pry
         query_params = {
             client_id: ENV['REDDIT_KEY'],
             response_type: "code",
