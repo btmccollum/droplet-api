@@ -9,8 +9,6 @@ class Api::V1::UsersController < ApplicationController
       user.password = user_params[:password]
       user.save!
 
-      binding.pry
-
       if user
         render json: { current: user }
       else
@@ -55,9 +53,6 @@ class Api::V1::UsersController < ApplicationController
          @user = {}
       end
 
-      # respond_to do |f|
-      #       f.json {render json @user}
-      # end
       render json: @user
    end
 
