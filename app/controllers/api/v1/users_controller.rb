@@ -7,9 +7,8 @@ class Api::V1::UsersController < ApplicationController
     def create
       user = User.find_or_create_by(email: user_params[:email])
       user.password = user_params[:password]
-      user.save!
-
-      if user
+      user.save
+      if user.valid?
         render json: { current: user }
       else
         render json: { error: 'Failed to Sign Up' }, status: 400

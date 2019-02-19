@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       get '/check_for_user', to: 'users#check_for_user'
       get '/login', to: 'sessions#create'
+      get '/userless_auth', to: 'sessions#userless_auth'
     end
   end
 
