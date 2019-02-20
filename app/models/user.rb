@@ -1,24 +1,42 @@
 class User < ApplicationRecord
-  # acts_as_token_authenticatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[reddit]
 
-
-  def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0, 20]
-    user.username = auth.info.name   # assuming the user model has a name
-    user.img = auth.extra.raw_info.icon_img # assuming the user model has an image
-    user.provider = auth.provider
-    user.uid = auth.uid
-    # If you are using confirmable and the provider(s) you use validate emails, 
-    # uncomment the line below to skip the confirmation emails.
-    # user.skip_confirmation!
-    end
+  def update_from_omniauth(auth)
+    self.username = auth.info.name
+    self.img = auth.extra.raw_info.icon_img # assuming the self model has an image
+    self.provider = auth.provider
+    self.uid = auth.uid
+    self.authentication_token = auth.credentials.token
+    self.refresh_token = auth.credentials.refresh_token
+    self.refresh_duration = auth.credentials.expires_at
   end
+
+  # def refresh_token_if_expired
+  #   if token_expired?
+  #     response    = RestClient.post "#{ENV['DOMAIN']}oauth2/token", :grant_type => 'refresh_token', :refresh_token => self.refresh_token, :client_id => ENV['APP_ID'], :client_secret => ENV['APP_SECRET'] 
+  #     refreshhash = JSON.parse(response.body)
+  
+  #     token_will_change!
+  #     expiresat_will_change!
+  
+  #     self.token     = refreshhash['access_token']
+  #     self.expiresat = DateTime.now + refreshhash["expires_in"].to_i.seconds
+  
+  #     self.save
+  #     puts 'Saved'
+  #   end
+  # end
+  
+  # def token_expired?
+  #   expiry = Time.at(self.expiresat) 
+  #   return true if expiry < Time.now # expired token, so we should quickly return
+  #   token_expires_at = expiry
+  #   save if changed?
+  #   false # token not expired. :D
+  # end
 
 end

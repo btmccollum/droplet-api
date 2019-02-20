@@ -1,9 +1,11 @@
 class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    def reddit        
-        user = User.from_omniauth(request.env["omniauth.auth"])
+    skip_before_action :authenticate, only: %i[reddit]
+    
+    def reddit
+        user = User.find_by(state_token: params[:state])     
+        user.update_from_omniauth(request.env["omniauth.auth"])
 
-        if user.persisted?
-            sign_in(user)
+        if user.save
             redirect_to 'http://localhost:3001'
         end   
     end

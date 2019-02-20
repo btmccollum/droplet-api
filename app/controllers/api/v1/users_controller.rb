@@ -1,47 +1,42 @@
 class Api::V1::UsersController < ApplicationController
+   skip_before_action :authenticate, only: %i[index create]
+
    def index
     @users = User.all
     render json: @users, status: :ok
    end
    
     def create
-      user = User.find_or_create_by(email: user_params[:email])
-      user.password = user_params[:password]
-      binding.pry
+      credentials = user_hash(params[:body])
+      user = User.new(email: credentials[:email])
+      user.password = credentials[:password]
       user.save
-      if user.valid?
-        render json: { current: user }
+   
+      if user.save
+         jwt = JsonWebToken.encode({id: user.id})
+         render json: { current: user, jwt: jwt }
       else
-        render json: { error: 'Failed to Sign Up' }, status: 400
+         render json: { error: 'Failed to Sign Up' }, status: 400
       end
   end
 
-   #    if params[:error]
-   #       puts "LOGIN ERROR", params
-   #       redirect_to "https://localhost:3001/"
-   #    else
-   #       # upon successful authorization redirect we have to make a post request for access token
-   #       conn = Faraday.new(:url => 'https://www.reddit.com/api/v1/access_token')
-         
-   #       # Reddit API requires HTTP basic auth, user and password are App client & secret
-   #       conn.basic_auth(ENV['REDDIT_KEY'], ENV['REDDIT_SECRET'])
+  def link_oauth
+      state_token = Sysrandom.urlsafe_base64(32)
+      current_user.update(state_token: state_token)
 
-   #       # API requirements for body
-   #       body = {
-   #           grant_type: "authorization_code",
-   #           code: params[:code],
-   #           redirect_uri: ENV['REDIRECT_URI'],
-   #       }
-
-   #       response = conn.post do |req|
-   #           req.body = body
-   #       end
-
-   #       auth_params = JSON.parse(response.body)
-
-   #       binding.pry
-   #   end
-
+      @redirect_info = {
+         query_params: {
+            client_id: ENV['REDDIT_KEY'],
+            response_type: "code",
+            redirect_uri: ENV['REDIRECT_URI'],
+            duration: "permanent",
+            state: state_token,
+            scope: "identity edit read save submit subscribe vote history"
+         }.to_query,
+         url: "https://www.reddit.com/api/v1/authorize?"
+      }
+      render json: @redirect_info
+   end
 
    def show
    end

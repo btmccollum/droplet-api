@@ -10,4 +10,8 @@ class Api::V1::PostsController < ApplicationController
 
         render json: { posts: postlist}
     end
+
+    def post_test
+        render json: { test: 'hello'}
+    end
 end
