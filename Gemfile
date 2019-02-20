@@ -26,8 +26,10 @@ gem 'faraday', '~> 0.15.4'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise', '~> 4.6', '>= 4.6.1'
-gem 'devise-jwt', '~> 0.5.8'
-gem 'simple_token_authentication', '~> 1.15', '>= 1.15.1'
+
+gem 'active_model_serializers'
+
+gem 'jwt'
 
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-oauth2', '~> 1.3.1'
