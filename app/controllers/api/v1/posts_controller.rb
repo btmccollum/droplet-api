@@ -1,4 +1,6 @@
 class Api::V1::PostsController < ApplicationController
+    before_action :is_token_expired?, except: %i[post_test]
+
     def fetch_posts
         current_user
         posts = Faraday.new(:url => 'https://oauth.reddit.com/r/all/top')
@@ -17,4 +19,10 @@ class Api::V1::PostsController < ApplicationController
     def post_test
         render json: { test: 'hello'}
     end
+
+    private
+
+    def is_token_expired?
+        current_user.refresh_token_if_expired
+    end 
 end
