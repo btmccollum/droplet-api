@@ -2,7 +2,7 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     skip_before_action :authenticate, only: %i[reddit]
     
     def reddit
-        user = User.find_by(state_token: params[:state])     
+        user = User.find_by(state_token: params[:state])   
         user.update_from_omniauth(request.env["omniauth.auth"])
 
         if user.save
