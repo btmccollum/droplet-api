@@ -8,7 +8,7 @@ class Api::V1::PostsController < ApplicationController
         postlist = posts.get do |req|
             req.headers['Authorization'] = "bearer #{current_user.authentication_token}"
             req.headers['User-Agent'] = "Ruby:Droplet API/0.0.0 by u/unovie"
-            req.params['limit'] = 10
+            req.params['limit'] = 25
             req.params['t'] = 'day'
         end
 

@@ -44,6 +44,7 @@ class User < ApplicationRecord
     end
   end
   
+  # checking whether or not an hour has elapsed since the token issuance
   def token_expired?
     expiry = Time.at(self.refresh_duration) 
     expiry < Time.now ? true : false
