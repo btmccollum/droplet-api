@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post '/logout', to: 'sessions#logout'
       get '/post_test', to: 'posts#post_test'
       get '/link_oauth', to: 'users#link_oauth'
+      get '/fetch_subreddits', to: 'subreddits#fetch_subreddits'
     end
   end
 
