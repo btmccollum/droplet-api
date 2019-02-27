@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :sessions, only: %i[create destroy]
       resources :posts, only: %i[fetch_posts post_test]
       resources :comments, only: %i[fetch_comments]
+      resources :preference_settings, only: %i[index create update]
 
       get '/check_for_user', to: 'users#check_for_user'
       # get '/login', to: 'sessions#create'

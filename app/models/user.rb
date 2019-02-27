@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[reddit]
 
+  has_one :preference_setting 
+
   # completes a user's profile once they link their reddit account
   def update_from_omniauth(auth)
     self.username = auth.info.name

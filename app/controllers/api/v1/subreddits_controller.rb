@@ -10,6 +10,7 @@ class Api::V1::SubredditsController < ApplicationController
             req.params['limit'] = 100
         end
         subreddits_hash = JSON.parse(subreddit_list.body)
+        
         render json: { subreddits: subreddits_hash}
     end
 end

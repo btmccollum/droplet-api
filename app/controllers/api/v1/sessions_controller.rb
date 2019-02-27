@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
         if user && user.valid_password?(credentials[:password])
             jwt = JsonWebToken.encode({id: user.id})
 
-            render json: {email: user.email, jwt: jwt}
+            render json: { user: user, preferences: user.preference_setting.id, jwt: jwt}
         else
           render json: { error: 'Invalid Credentials.'}, status: 404
         end
