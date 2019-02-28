@@ -28,7 +28,7 @@ gem 'devise', '~> 4.6', '>= 4.6.1'
 
 gem 'active_model_serializers'
 
-gem 'jwt'
+gem 'jwt', '~> 2.1'
 
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-oauth2', '~> 1.3.1'

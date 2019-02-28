@@ -12,9 +12,9 @@ class Api::V1::UsersController < ApplicationController
       user.password = credentials[:password]
       user.save
       user.preference_setting = PreferenceSetting.create
-
       if user.save
          jwt = JsonWebToken.encode({id: user.id})
+         binding.pry
          render json: { current: user, preferences: user.preference_setting.id, jwt: jwt }
       else
          render json: { error: 'Failed to Sign Up' }, status: 400
@@ -40,8 +40,7 @@ class Api::V1::UsersController < ApplicationController
    end
 
    def load_user
-      binding.pry
-      id = JsonWebToken.decode(token)
+      render json: { current: current_user, preferences: current_user.preference_setting }
    end
 
    def check_for_user
