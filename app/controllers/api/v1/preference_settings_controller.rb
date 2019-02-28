@@ -7,6 +7,10 @@ class Api::V1::PreferenceSettingsController < ApplicationController
         render json: { feed: user_feed }
     end
 
+    def show
+        binding.pry
+    end
+
     def update
         feed = current_user.preference_setting
         subreddit = eval(params['body'])[:subreddit]

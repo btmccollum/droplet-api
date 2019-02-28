@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
     render json: @users, status: :ok
    end
    
-    def create
+   def create
       credentials = user_hash(params[:body])
       user = User.new(email: credentials[:email])
       user.password = credentials[:password]
@@ -39,7 +39,9 @@ class Api::V1::UsersController < ApplicationController
       render json: @redirect_info
    end
 
-   def show
+   def load_user
+      binding.pry
+      id = JsonWebToken.decode(token)
    end
 
    def check_for_user

@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[index create destroy]
+      resources :users, only: %i[index create destroy load_user]
       resources :sessions, only: %i[create destroy]
       resources :posts, only: %i[fetch_posts post_test]
       resources :comments, only: %i[fetch_comments]
-      resources :preference_settings, only: %i[index create update]
+      resources :preference_settings, only: %i[index create show update]
 
       get '/check_for_user', to: 'users#check_for_user'
       # get '/login', to: 'sessions#create'
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get '/post_test', to: 'posts#post_test'
       get '/link_oauth', to: 'users#link_oauth'
       get '/fetch_subreddits', to: 'subreddits#fetch_subreddits'
+      get '/load_user', to: 'users#load_user'
     end
   end
 
