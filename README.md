@@ -45,7 +45,7 @@ npm start
 
 7) Enjoy!
 
-NOTES: 
+### NOTES: 
 * You may need to manually visit (https://localhost:3000) to provide SSL authorization
 
 * If the frontend is not loaded on port 3001 you will need to adjust the following files to point to the correct page: 
@@ -57,7 +57,7 @@ controllers/api/v1/users/omnniauth_callbacks_controller.rb
 ## Built With
 * Ruby on Rails
 ## Authors
-* Brad McCollum
+* [Brad McCollum](https://github.com/btmccollum)
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 ## Acknowledgments
