@@ -5,11 +5,11 @@ class Api::V1::SessionsController < ApplicationController
     def create 
         credentials = user_hash(params[:body])
         user = User.find_by(email: credentials[:email])
-
+    
         if user && user.valid_password?(credentials[:password])
-            jwt = JsonWebToken.encode({id: user.id})
+            jwt = Auth.encrypt({id: user.id})
 
-            render json: { user: user, preferences: user.preference_setting.id, jwt: jwt}
+            render json: { current: user, preferences: user.preference_setting.id, jwt: jwt}
         else
           render json: { error: 'Invalid Credentials.'}, status: 404
         end

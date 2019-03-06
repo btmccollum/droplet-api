@@ -19,4 +19,18 @@ class Api::V1::PreferenceSettingsController < ApplicationController
 
         render json: { feed: feed}
     end
+
+    # removing subreddits from preference_setting subreddits array
+    def destroy
+        feed = current_user.preference_setting
+        subreddit = eval(params['body'])[:subreddit]
+
+        if feed.subreddits.include?(subreddit) 
+            feed.subreddits.delete(subreddit)
+        end
+        
+        feed.save
+
+        render json: { action: "Successfully Deleted"}
+    end
 end

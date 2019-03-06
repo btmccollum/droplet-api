@@ -13,8 +13,8 @@ class Api::V1::UsersController < ApplicationController
       user.save
       user.preference_setting = PreferenceSetting.create
       if user.save
-         jwt = JsonWebToken.encode({id: user.id})
-         binding.pry
+         jwt = Auth.encrypt({id: user.id})
+         
          render json: { current: user, preferences: user.preference_setting.id, jwt: jwt }
       else
          render json: { error: 'Failed to Sign Up' }, status: 400
