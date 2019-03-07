@@ -14,8 +14,7 @@ class ApplicationController < ActionController::API
         end
     end
 
-    def authenticate     
-        # binding.pry  
+    def authenticate    
         render json: {error: "unauthorized"}, status: 401 unless current_user
     end
 

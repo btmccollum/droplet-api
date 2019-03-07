@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
 
     def fetch_posts
         subreddits = eval(request.params['0'])[:subreddits]
-        
+    
         # handle get request for user feed
         if subreddits.length > 0 
             query_string = subreddits.join(",").gsub(",", "+")
@@ -39,6 +39,10 @@ class Api::V1::PostsController < ApplicationController
     private
 
     def is_token_expired?
-        current_user.refresh_token_if_expired
+        if current_user.refresh_token
+            current_user.refresh_token_if_expired
+        else
+            false
+        end
     end 
 end
