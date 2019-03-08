@@ -22,6 +22,12 @@ class Api::V1::UsersController < ApplicationController
       end
   end
 
+  def destroy
+      # A response is rendered otherwise a response will not be returned without a defined current_user
+      render json: {}, status: 200
+      User.destroy(current_user.id)
+  end
+
   def link_oauth
       state_token = Sysrandom.urlsafe_base64(32)
       current_user.update(state_token: state_token)

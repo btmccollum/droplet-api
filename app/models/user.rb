@@ -5,20 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[reddit]
 
-  has_one :preference_setting 
+  has_one :preference_setting, :dependent => :destroy
 
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :password, presence: true, on: :create
   validates :password, confirmation: true, on: :create
-  # validates :password_confirmation, presence: true
-  # validate :passwords_match, on: :create
-
-  # def passwords_match
-  #   if password != password_confirmation
-  #     errors.add(:passwords, "must match")
-  #   end
-  # end
 
   # completes a user's profile once they link their reddit account
   def update_from_omniauth(auth)

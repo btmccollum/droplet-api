@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
         if user && user.valid_password?(credentials[:password])
             jwt = Auth.encrypt({id: user.id})
 
-            render json: { current: user, preferences: user.preference_setting.id, jwt: jwt}
+            render json: { current: user, preferences: user.preference_setting, jwt: jwt}
         else
           render json: { error: 'Invalid Credentials.'}, status: 404
         end
