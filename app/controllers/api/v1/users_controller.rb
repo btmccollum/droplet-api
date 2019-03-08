@@ -70,6 +70,7 @@ class Api::V1::UsersController < ApplicationController
       credentials = user_hash(params[:body])
       unless credentials[:password] == credentials[:password_confirmation] 
          error_message = ["Passwords must match."]
+ 
          render json: { error: error_message }, status: 400
       end
    end

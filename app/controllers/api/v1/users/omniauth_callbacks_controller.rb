@@ -7,6 +7,9 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
         user.update_from_omniauth(request.env["omniauth.auth"])
 
         if user.save
+            user.linked = true
+            user.save
+
             redirect_to 'http://localhost:3001'
         end   
     end
