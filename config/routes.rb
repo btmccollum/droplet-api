@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[index create destroy load_user]
+      resources :users, only: %i[index create destroy]
       resources :sessions, only: %i[create destroy]
       resources :posts, only: %i[fetch_posts post_test]
       resources :comments, only: %i[fetch_comments]
@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   end
 
   get '/users/sign_in', to: 'api/v1/users/omniauth_callbacks#reddit'
+  get '/auth/failure', to: 'api/v1/users/omniauth_callbacks#failure'
 end

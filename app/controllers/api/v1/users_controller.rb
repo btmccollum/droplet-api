@@ -2,6 +2,10 @@ class Api::V1::UsersController < ApplicationController
    skip_before_action :authenticate, only: %i[index create]
    before_action :passwords_match?, only: %i[create]
 
+   # before_action do
+   #    self.namespace_for_serializer = Api::V1
+   #  end
+    
    def index
     @users = User.all
     render json: @users, status: :ok
