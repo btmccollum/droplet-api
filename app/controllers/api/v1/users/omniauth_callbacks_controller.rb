@@ -12,6 +12,7 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
             user.save
          
             # redirect_to 'http://localhost:3001'
+            # adding redirect for herkou deployment
             redirect_to 'https://droplet-app.herokuapp.com/'
         end   
     end
