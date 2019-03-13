@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
       user.preference_setting = PreferenceSetting.create
       if user.save
          jwt = Auth.encrypt({id: user.id})
-   
+         
          render json: { current: user, preferences: user.preference_setting.id, jwt: jwt }
       else
          render json: { error: user.errors.full_messages.uniq }, status: 400
