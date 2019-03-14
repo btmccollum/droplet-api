@@ -1,5 +1,6 @@
 class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate, only: %i[reddit]
+    respond_to :json
     
     def reddit
         # need to handle redirect from reddit approval page back to api to front
