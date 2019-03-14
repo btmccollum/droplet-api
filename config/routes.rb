@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'api/v1/users/omniauth_callbacks' } do
-    get '/api/v1/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
-  end
+  # devise_for :users, controllers: { omniauth_callbacks: 'api/v1/users/omniauth_callbacks' } do
+  #   get '/api/v1/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
+  # end
+  devise_for :users, skip: :all
 
   namespace :api do
     namespace :v1 do
@@ -10,8 +11,11 @@ Rails.application.routes.draw do
       resources :posts, only: %i[fetch_posts post_test]
       resources :comments, only: %i[fetch_comments]
       resources :preference_settings, only: %i[index create show update destroy]
+      devise_scope :user do
+        get '/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
+      end
 
-      get '/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
+      # get '/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
       get '/check_for_user', to: 'users#check_for_user'
       get '/userless_auth', to: 'sessions#userless_auth'
       get '/fetch_posts', to: 'posts#fetch_posts'
