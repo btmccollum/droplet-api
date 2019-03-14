@@ -6,6 +6,8 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
         # need to handle redirect from reddit approval page back to api to front
         user = User.find_by(state_token: params[:state])   
     
+        puts request.env["omniauth.auth"]
+        puts "#{request.env["omniauth.auth"]}"
         user.update_from_omniauth(request.env["omniauth.auth"])
 
         if user.save
