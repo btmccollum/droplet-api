@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   # completes a user's profile once they link their reddit account
   def update_from_omniauth(auth)
+    puts auth
     self.username = auth.info.name
     self.img = auth.extra.raw_info.icon_img
     self.provider = auth.provider
