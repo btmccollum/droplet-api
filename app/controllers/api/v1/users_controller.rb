@@ -12,7 +12,6 @@ class Api::V1::UsersController < ApplicationController
    end
    
    def create
-      binding.pry
       credentials = user_hash(params[:body])
       user = User.new(email: credentials[:email])
       user.password = credentials[:password]
