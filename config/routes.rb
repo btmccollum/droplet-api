@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :comments, only: %i[fetch_comments]
       resources :preference_settings, only: %i[index create show update destroy]
 
+      get '/auth/reddit/callback', to: 'users/omniauth_callbacks#reddit'
       get '/check_for_user', to: 'users#check_for_user'
       get '/userless_auth', to: 'sessions#userless_auth'
       get '/fetch_posts', to: 'posts#fetch_posts'
