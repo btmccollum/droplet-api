@@ -2,7 +2,6 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     skip_before_action :authenticate, only: %i[reddit]
     
     def reddit
-        binding.pry
         user = User.find_by(state_token: params[:state])   
     
         user.update_from_omniauth(request.env["omniauth.auth"])
@@ -18,6 +17,6 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     end
 
     def failure
-        binding.pry
+
     end
 end
