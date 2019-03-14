@@ -22,7 +22,8 @@ class Api::V1::UsersController < ApplicationController
          
          render json: { current: user, preferences: user.preference_setting.id, jwt: jwt }
       else
-         render json: { error: user.errors.full_messages.uniq }, status: 400
+         # render json: { error: user.errors.full_messages.uniq }, status: 400
+         render json: { error: user.errors, user: user }
       end
   end
 
