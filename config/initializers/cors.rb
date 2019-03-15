@@ -7,10 +7,10 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:5000'
+    origins 'https://droplet-app.herokuapp.com', 'http://localhost:5000'
     # origins 'http://localhost:3001'
     # origins 'http://droplet-app.herokuapp.com'
-    origins 'https://droplet-app.herokuapp.com'
+    # origins 'https://droplet-app.herokuapp.com'
 
     resource '*',
       headers: :any,
