@@ -1,13 +1,9 @@
 class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate, only: %i[reddit]
-    respond_to :json
     
     def reddit
-        # need to handle redirect from reddit approval page back to api to front
         user = User.find_by(state_token: params[:state])   
     
-        puts request.env["omniauth.auth"]
-        puts "#{request.env["omniauth.auth"]}"
         user.update_from_omniauth(request.env["omniauth.auth"])
 
         if user.save
@@ -21,6 +17,6 @@ class Api::V1::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     end
 
     def failure
-
+        # binding.pry
     end
 end
