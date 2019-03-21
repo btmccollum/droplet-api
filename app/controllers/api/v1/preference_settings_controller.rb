@@ -9,9 +9,9 @@ class Api::V1::PreferenceSettingsController < ApplicationController
 
     def update
         feed = current_user.preference_setting
-        subreddit = eval(params['body'])[:subreddit]
+        subreddit = eval(params['body'])[:subreddit].downcase!
 
-        if !feed.subreddits.include?(subreddit) 
+        if subreddit.present?  && subreddit !== undefined && !feed.subreddits.include?(subreddit) 
             feed.subreddits << subreddit
         end
         
@@ -23,7 +23,7 @@ class Api::V1::PreferenceSettingsController < ApplicationController
     # removing subreddits from preference_setting subreddits array
     def destroy
         feed = current_user.preference_setting
-        subreddit = eval(params['body'])[:subreddit]
+        subreddit = eval(params['body'])[:subreddit].downcase!
 
         if feed.subreddits.include?(subreddit) 
             feed.subreddits.delete(subreddit)

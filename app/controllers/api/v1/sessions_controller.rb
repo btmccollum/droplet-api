@@ -4,7 +4,7 @@ class Api::V1::SessionsController < ApplicationController
     # normal login flow, not OAuth
     def create 
         credentials = user_hash(params[:body])
-        user = User.find_by(email: credentials[:email])
+        user = User.find_by(email: credentials[:email].downcase!)
     
         if user && user.valid_password?(credentials[:password])
             jwt = Auth.encrypt({id: user.id})
