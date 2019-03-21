@@ -9,7 +9,9 @@ class Api::V1::UsersController < ApplicationController
    
    def create
       credentials = user_hash(params[:body])
-      user_email = (credentials[:email]).downcase!
+      user_email = credentials[:email]
+      user_email.downcase!
+      
       user = User.new(email: user_email)
       user.password = credentials[:password]
       user.save
