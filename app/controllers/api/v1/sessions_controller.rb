@@ -4,7 +4,8 @@ class Api::V1::SessionsController < ApplicationController
     # normal login flow, not OAuth
     def create 
         credentials = user_hash(params[:body])
-        user_email = (credentials[:email]).downcase!
+        user_email = credentials[:email]
+        user_email.downcase!
         
         user = User.find_by(email: user_email)
     
