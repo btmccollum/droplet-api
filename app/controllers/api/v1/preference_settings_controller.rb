@@ -11,7 +11,7 @@ class Api::V1::PreferenceSettingsController < ApplicationController
         feed = current_user.preference_setting
         subreddit = eval(params['body'])[:subreddit].downcase!
 
-        if subreddit.present?  && subreddit !== undefined && !feed.subreddits.include?(subreddit) 
+        if subreddit.present?  && subreddit != undefined && !feed.subreddits.include?(subreddit) 
             feed.subreddits << subreddit
         end
         
