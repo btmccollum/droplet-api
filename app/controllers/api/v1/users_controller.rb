@@ -1,13 +1,10 @@
 class Api::V1::UsersController < ApplicationController
-   skip_before_action :authenticate, only: %i[index create]
+   skip_before_action :authenticate, only: %i[create]
    before_action :passwords_match?, only: %i[create]
-    
-   def index
-    @users = User.all
-    render json: @users, status: :ok
-   end
    
+   # creating a user with information passed from droplet-web frontend
    def create
+      # establish hash from frontend and sanitize data
       credentials = user_hash(params[:body])
       user_email = credentials[:email]
       user_email.downcase!
@@ -16,7 +13,9 @@ class Api::V1::UsersController < ApplicationController
       user.password = credentials[:password]
       user.save
       user.preference_setting = PreferenceSetting.create
+      
       if user.save
+         # create JWT token for authorization checks
          jwt = Auth.encrypt({id: user.id})
          
          render json: { current: user, preferences: user.preference_setting.id, jwt: jwt }
@@ -31,10 +30,13 @@ class Api::V1::UsersController < ApplicationController
       User.destroy(current_user.id)
   end
 
+   # Reddit requires a user to be redirected to their page for approval, creating hash to pass to front end for routing
   def link_oauth
+      # Reddit requires state token for droplet's use to further verify user
       state_token = Sysrandom.urlsafe_base64(32)
       current_user.update(state_token: state_token)
 
+      # creating hash to pass to frontend for OAuth redirect
       @redirect_info = {
          query_params: {
             client_id: ENV['REDDIT_KEY'],

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[index create destroy]
+      resources :users, only: %i[create destroy]
       resources :sessions, only: %i[create destroy]
       resources :posts, only: %i[fetch_posts post_test]
       resources :comments, only: %i[fetch_comments]
