@@ -22,7 +22,6 @@ class User < ApplicationRecord
     self.img = auth.extra.raw_info.icon_img
     self.provider = auth.provider
     self.uid = auth.uid
-    # self.authentication_token = auth.credentials.token
     self.reddit_token = auth.credentials.token
     self.refresh_token = auth.credentials.refresh_token
     self.refresh_duration = auth.credentials.expires_at
@@ -49,7 +48,6 @@ class User < ApplicationRecord
      
       refresh_hash = JSON.parse(response.body)
 
-      # self.authentication_token = refresh_hash['access_token']
       self.reddit_token = refresh_hash['access_token']
       self.refresh_duration = (Time.now + refresh_hash['expires_in']).to_i
     

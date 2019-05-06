@@ -7,7 +7,6 @@ class Api::V1::CommentsController < ApplicationController
         comments = Faraday.new(:url => "https://oauth.reddit.com/r/#{params_hash[:subreddit]}/comments/#{params_hash[:id]}")
     
         commentlist = comments.get do |req|
-            # req.headers['Authorization'] = "bearer #{current_user.authentication_token}"
             req.headers['Authorization'] = "bearer #{current_user.reddit_token}"
             req.headers['User-Agent'] = "Ruby:Droplet API/0.0.0 by u/unovie"
             req.params['show_edits'] = 'true',
