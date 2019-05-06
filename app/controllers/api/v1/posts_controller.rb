@@ -20,7 +20,8 @@ class Api::V1::PostsController < ApplicationController
             posts = Faraday.new(:url => 'https://oauth.reddit.com/best')
     
             postlist = posts.get do |req|
-                req.headers['Authorization'] = "bearer #{current_user.authentication_token}"
+                # req.headers['Authorization'] = "bearer #{current_user.authentication_token}"
+                req.headers['Authorization'] = "bearer #{current_user.reddit_token}"
                 req.headers['User-Agent'] = "Ruby:Droplet API/0.0.0 by u/unovie"
                 req.params['limit'] = 100
                 req.params['over_18'] = 'false'

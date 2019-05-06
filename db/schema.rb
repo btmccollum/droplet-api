@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_214948) do
+ActiveRecord::Schema.define(version: 2019_05_06_221742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2019_05_06_214948) do
     t.string "username"
     t.string "img"
     t.string "state_token"
-    t.string "refresh_token"
     t.integer "refresh_duration"
     t.boolean "linked", default: false
     t.string "encrypted_reddit_token"
