@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_one :preference_setting, :dependent => :destroy
 
+  attr_encrypted_options.merge!(encode: true, encode_iv: true, encode_salt: true)
+  attr_encrypted :reddit_token, key: ENV['RKEY']
+  attr_encrypted :refresh_token, key: ENV['REF_KEY']
+
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :password, presence: true, on: :create

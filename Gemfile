@@ -31,6 +31,8 @@ gem 'active_model_serializers'
 
 gem 'jwt', '~> 2.1'
 
+gem 'attr_encrypted', '~> 3.1'
+
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'

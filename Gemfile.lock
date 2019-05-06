@@ -55,6 +55,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    attr_encrypted (3.1.0)
+      encryptor (~> 3.0.0)
     bcrypt (3.1.12)
     bootsnap (1.4.1)
       msgpack (~> 1.0)
@@ -76,6 +78,7 @@ GEM
     dotenv-rails (2.7.1)
       dotenv (= 2.7.1)
       railties (>= 3.2, < 6.1)
+    encryptor (3.0.0)
     erubi (1.8.0)
     eventmachine (1.2.7)
     faraday (0.15.4)
@@ -203,6 +206,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  attr_encrypted (~> 3.1)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   byebug

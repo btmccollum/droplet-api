@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_023221) do
+ActiveRecord::Schema.define(version: 2019_05_06_214948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,10 @@ ActiveRecord::Schema.define(version: 2019_03_08_023221) do
     t.string "refresh_token"
     t.integer "refresh_duration"
     t.boolean "linked", default: false
+    t.string "encrypted_reddit_token"
+    t.string "encrypted_reddit_token_iv"
+    t.string "encrypted_refresh_token"
+    t.string "encrypted_refresh_token_iv"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
