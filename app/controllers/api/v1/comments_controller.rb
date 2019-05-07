@@ -4,7 +4,7 @@ class Api::V1::CommentsController < ApplicationController
     def fetch_comments
         params_hash = eval(params['0'])
 
-        comments = Faraday.new(:url => "https://oauth.reddit.com/r/#{params_hash[:subreddit]}/comments/#{params_hash[:id]}")
+        comments = Faraday.new(:url => "https://oauth.reddit.com/#{params_hash[:path]}")
     
         commentlist = comments.get do |req|
             req.headers['Authorization'] = "bearer #{current_user.reddit_token}"
