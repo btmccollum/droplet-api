@@ -37,7 +37,7 @@ gem 'omniauth', '~> 1.9'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
 
-
+gem 'omniauth-rails_csrf_protection'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
