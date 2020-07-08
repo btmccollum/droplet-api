@@ -25,7 +25,7 @@ gem 'faraday', '~> 0.15.4'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'devise', '~> 4.6', '>= 4.6.1'
+gem 'devise', '~> 4.7'
 
 gem 'active_model_serializers'
 
